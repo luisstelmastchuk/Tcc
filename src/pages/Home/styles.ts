@@ -1,22 +1,18 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import { Tabs as TabsAnt } from 'antd'
+
+const { TabPane: TabPaneAnt } = TabsAnt
 
 export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
   width: 100vw;
   height: 100vh;
-  padding: 5%;
 `
 
-export const UserForm = styled.div`
-  width: 20%;
-  height: 20%;
+export const Tabs = styled(TabsAnt)`
+  height: 100%;
+  .ant-tabs-content {
+    height: 100%;
+  }
 `
 
-export const UserList = styled.div`
-  width: 20%;
-  height: 80%;
-`
+export const TabPane = styled(TabPaneAnt)``

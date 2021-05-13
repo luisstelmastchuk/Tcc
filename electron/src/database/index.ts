@@ -1,7 +1,7 @@
 import { createConnection, getConnectionOptions } from 'typeorm'
 import path from 'path'
 
-import { User } from '../models/entities'
+import { Table, Attribute } from '../models/entities'
 
 const findDatabase = async (): Promise<string> => {
   if (process.env.NODE_ENV === 'development') {
@@ -17,7 +17,7 @@ export const initializeDatabase = async (): Promise<void> => {
     name: 'default',
     type: 'sqlite',
     database,
-    entities: [User],
+    entities: [Table, Attribute],
   })
     .then(() => console.log('Database Up'))
     .catch((error) => console.error(error))

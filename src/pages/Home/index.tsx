@@ -1,58 +1,41 @@
 import React, { useState, useEffect } from 'react'
 import { ipcRenderer } from 'electron'
 
-import { User } from '../../models/User'
+import { Table as TableModel } from '../../../shared/models/Table'
 
-import { message, Form, Input, Button } from 'antd'
-import { Container, UserForm, UserList } from './styles'
+import CreateContainer from '../../containers/CreateContainer'
+import InsertionContainer from '../../containers/InsertionContainer'
+
+import { Container, Tabs, TabPane } from './styles'
 
 const Home: React.FC = () => {
-  const [users, setUsers] = useState<User[]>([])
-  const [form] = Form.useForm()
+  const [activeTab, setActiveTab] = useState<string>('1')
+  const [tables, setTables] = useState<TableModel[]>([])
 
   useEffect(() => {
-    ipcRenderer.send('user:findAll')
-    ipcRenderer.once('user:findAll:response', (event, users) => {
-      setUsers(users)
+    ipcRenderer.send('table:getAll')
+    ipcRenderer.once('table:getAll:response', (event, response) => {
+      setTables(response)
     })
   }, [])
 
-  const createUserHandler = async () => {
-    try {
-      await form.validateFields()
-      const payload = form.getFieldsValue()
-      ipcRenderer.send('user:create', payload)
-      ipcRenderer.once('user:create:response', (event, newUser) => {
-        setUsers([...users, newUser])
-      })
-    } catch ({ errorFields }) {
-      errorFields.forEach(({ errors }) => {
-        errors.forEach((error) => {
-          message.warning(error)
-        })
-      })
-    }
+  const handleTabChange = (selectedTab: string): void => {
+    setActiveTab(selectedTab)
   }
+
   return (
     <Container>
-      <UserForm>
-        <Form form={form}>
-          <Form.Item
-            rules={[{ message: 'Nome obrigatório', required: true }]}
-            name="name"
-          >
-            <Input placeholder="Nome" type="text" name="name" />
-          </Form.Item>
-          <Button onClick={() => createUserHandler()}>Salvar</Button>
-        </Form>
-      </UserForm>
-      <UserList>
-        <ul>
-          {users.map((user) => (
-            <li key={user.id}>{user.name}</li>
-          ))}
-        </ul>
-      </UserList>
+      <Tabs onChange={handleTabChange} activeKey={activeTab}>
+        <TabPane tab="Tabelas" key="1">
+          <CreateContainer tables={tables} setTables={setTables} />
+        </TabPane>
+        <TabPane tab="Inserções" key="2">
+          <InsertionContainer tables={tables} />
+        </TabPane>
+        <TabPane tab="Resultado" key="3">
+          Content of Tab Pane 3
+        </TabPane>
+      </Tabs>
     </Container>
   )
 }

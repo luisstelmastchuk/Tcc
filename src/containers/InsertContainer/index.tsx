@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { ipcRenderer } from 'electron'
 
 import { Table as TableModel } from '../../../shared/models/Table'
@@ -27,14 +27,19 @@ interface IProps {
   tables: TableModel[]
 }
 
-const InsertionContainer: React.FC<IProps> = ({ tables }) => {
+const InsertContainer: React.FC<IProps> = ({ tables }) => {
   const [table, setTable] = useState<TableModel | null>(null)
   const [swapping, setSwapping] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(false)
-  const [attributes, setAttributes] = useState<AttributeModel[]>()
+  const [attributes, setAttributes] = useState<AttributeModel[]>([])
   const [valueToInsert, setValueToInsert] = useState<string | null>(null)
   const [queries, setQueries] = useState<string[]>([])
   const [form] = Form.useForm()
+
+  useEffect(() => {
+    setTable(tables[0])
+    setAttributes(tables[0].attributes)
+  }, [tables])
 
   const handleFileChosen = (file: File): void => {
     const fileReader = new FileReader()
@@ -91,6 +96,13 @@ const InsertionContainer: React.FC<IProps> = ({ tables }) => {
     setValueToInsert(formatedValues)
   }
 
+  const formatConditionType = (condition: string): string | number => {
+    if (!condition || condition === '') {
+      return
+    }
+    return Number.parseFloat(condition) || `'${condition}'`
+  }
+
   const handleAddQuery = (): void => {
     const values = form.getFieldsValue()
 
@@ -109,7 +121,12 @@ const InsertionContainer: React.FC<IProps> = ({ tables }) => {
 
     const query = `INSERT INTO ${table.name}(${attributes
       .map((attribute) => attribute.name)
-      .join(', ')}) VALUES (${valueToInsert || '...'})`
+      .join(', ')}) VALUES (${
+      valueToInsert
+        .split(',')
+        .map((value) => formatConditionType(value))
+        .join(',') || '...'
+    })`
 
     setQueries((oldValues) => [...oldValues, query])
     setValueToInsert(null)
@@ -167,6 +184,7 @@ const InsertionContainer: React.FC<IProps> = ({ tables }) => {
         <Form>
           <Form.Item label="Tabela">
             <Select
+              value={table?.name}
               onChange={(tableName) => handleSelectTable(tableName.toString())}
             >
               {tables.map((table) => (
@@ -227,7 +245,12 @@ const InsertionContainer: React.FC<IProps> = ({ tables }) => {
         <QueryExempleContainer>
           {`INSERT INTO ${table.name}(${attributes
             .map((attribute) => attribute.name)
-            .join(', ')}) VALUES (${valueToInsert || '...'})`}
+            .join(', ')}) VALUES (${
+            valueToInsert
+              ?.split(',')
+              .map((value) => formatConditionType(value))
+              .join(',') || '...'
+          })`}
           <Button
             type="primary"
             style={{ margin: '0 10px' }}
@@ -258,4 +281,4 @@ const InsertionContainer: React.FC<IProps> = ({ tables }) => {
   )
 }
 
-export default InsertionContainer
+export default InsertContainer

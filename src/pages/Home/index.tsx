@@ -4,9 +4,12 @@ import { ipcRenderer } from 'electron'
 import { Table as TableModel } from '../../../shared/models/Table'
 
 import CreateContainer from '../../containers/CreateContainer'
-import InsertionContainer from '../../containers/InsertionContainer'
+import InsertContainer from '../../containers/InsertContainer'
+import SelectionContainer from '../../containers/SelectContainer'
 
 import { Container, Tabs, TabPane } from './styles'
+
+import BackgroundImage from '../../assets/background.jpg'
 
 const Home: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>('1')
@@ -24,16 +27,16 @@ const Home: React.FC = () => {
   }
 
   return (
-    <Container>
+    <Container imageUrl={BackgroundImage}>
       <Tabs onChange={handleTabChange} activeKey={activeTab}>
         <TabPane tab="Tabelas" key="1">
           <CreateContainer tables={tables} setTables={setTables} />
         </TabPane>
         <TabPane tab="Inserções" key="2">
-          <InsertionContainer tables={tables} />
+          <InsertContainer tables={tables} />
         </TabPane>
-        <TabPane tab="Resultado" key="3">
-          Content of Tab Pane 3
+        <TabPane tab="Seleções" key="3">
+          <SelectionContainer tables={tables} />
         </TabPane>
       </Tabs>
     </Container>

@@ -51,3 +51,22 @@ ipcMain.on('table:insert', async (event, queries) => {
     event.reply('table:insert:response', err)
   }
 })
+
+ipcMain.on('table:query', async (event, request) => {
+  try {
+    const queries: {
+      query: string
+      condition: string
+      result?: any
+    }[] = request
+    await Promise.all(
+      queries.map(async (query, index) => {
+        queries[index].result = await connection.query(query.query)
+      })
+    )
+    event.reply('table:query:response', { queries })
+  } catch (err) {
+    console.error(err)
+    event.reply('table:query:response', { err })
+  }
+})

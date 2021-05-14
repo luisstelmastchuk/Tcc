@@ -43,7 +43,7 @@ export const TableCreatorContainer = styled.div`
   align-items: center;
 
   width: 100%;
-  height: 60%;
+  height: 50%;
 `
 
 export const TableCreatorWrapper = styled.div`
@@ -54,6 +54,20 @@ export const TableCreatorWrapper = styled.div`
 
   width: 25%;
   height: 50%;
+
+  background: white;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 10px 16px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+`
+
+export const ActionContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  width: 100%;
+  height: 10%;
 `
 
 export const TableCreatorReview = styled.div`

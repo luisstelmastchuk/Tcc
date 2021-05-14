@@ -21,6 +21,11 @@ export const QueryContainer = styled.div`
   width: 100%;
   height: 20%;
   padding: 5%;
+
+  background: white;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 10px 16px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
 `
 
 export const QueryExempleContainer = styled.div`
@@ -30,9 +35,13 @@ export const QueryExempleContainer = styled.div`
 
   border: 1px solid #00000017;
   border-radius: 5px;
-  margin: 10px 0px;
   width: 100%;
   height: 10%;
+
+  background: white;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 10px 16px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
 `
 
 export const QueryWrapper = styled.div`
@@ -63,6 +72,11 @@ export const RawContainer = styled.div`
     background-color: #80808073;
     border-radius: 20px;
   }
+
+  background: white;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 10px 16px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
 `
 
 export const ActionContainer = styled.div`

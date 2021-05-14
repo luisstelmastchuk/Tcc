@@ -20,6 +20,7 @@ import {
   AttributeName,
   AttributeType,
   AttributeWrapper,
+  ActionContainer,
 } from './styles'
 
 interface IProps {
@@ -127,11 +128,6 @@ const CreateContainer: React.FC<IProps> = ({ tables, setTables }) => {
               Add
             </Button>
           </Row>
-          <Row>
-            <Button type="primary" onClick={() => handleAddTable()}>
-              Executar
-            </Button>
-          </Row>
         </TableCreatorWrapper>
       </TableCreatorContainer>
       <TableCreatorReview>
@@ -210,6 +206,15 @@ const CreateContainer: React.FC<IProps> = ({ tables, setTables }) => {
           <></>
         )}
       </TableCreatorReview>
+      <ActionContainer>
+        <Button
+          type="primary"
+          onClick={() => handleAddTable()}
+          style={{ marginRight: '5%' }}
+        >
+          Executar
+        </Button>
+      </ActionContainer>
     </>
   )
 }

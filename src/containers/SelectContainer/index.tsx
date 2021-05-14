@@ -115,7 +115,7 @@ const SelectContainer: React.FC<IProps> = ({ tables }) => {
       if (fieldsToSearch && fieldsToSearch !== '*') {
         queries.push({
           query: `SELECT ${fieldsToSearch} FROM ${table.name}`,
-          condition: 'Aplicando os campos solicitados',
+          condition: 'Campos solicitados',
         })
       }
     } else if (fieldsToSearch) {
@@ -126,7 +126,7 @@ const SelectContainer: React.FC<IProps> = ({ tables }) => {
               query: `SELECT * FROM ${table.name} WHERE ${where.field} ${
                 where.operation
               } ${formatConditionType(where.condition)}`,
-              condition: `Aplicando a condição: ${where.field} ${
+              condition: `Condição: ${where.field} ${
                 where.operation
               } ${formatConditionType(where.condition)}`,
             })
@@ -135,7 +135,7 @@ const SelectContainer: React.FC<IProps> = ({ tables }) => {
               query: `${queries[index].query} AND ${where.field} ${
                 where.operation
               } ${formatConditionType(where.condition)}`,
-              condition: `Aplicando a condição: ${where.field} ${
+              condition: `Condição: ${where.field} ${
                 where.operation
               } ${formatConditionType(where.condition)}`,
             })
@@ -154,11 +154,11 @@ const SelectContainer: React.FC<IProps> = ({ tables }) => {
                 )}`
             )
             .join(' AND ')}`,
-          condition: 'Aplicando os campos solicitados',
+          condition: 'Campos solicitados',
         })
       }
     }
-
+    console.log(queries)
     if (fieldsToSearch) {
       setIsExecuting(true)
       setResults([])
@@ -183,6 +183,12 @@ const SelectContainer: React.FC<IProps> = ({ tables }) => {
   }
 
   const formatConditionType = (condition: string): string | number => {
+    if (!condition || condition === '') {
+      return
+    }
+    if (condition === 'true' || condition === 'false') {
+      return condition
+    }
     return Number.parseFloat(condition) || `'${condition}'`
   }
 

@@ -32,10 +32,10 @@ const Home: React.FC = () => {
         <TabPane tab="Tabelas" key="1">
           <CreateContainer tables={tables} setTables={setTables} />
         </TabPane>
-        <TabPane tab="Inserções" key="2">
+        <TabPane tab="Inserções" key="2" disabled={!tables.length}>
           <InsertContainer tables={tables} />
         </TabPane>
-        <TabPane tab="Seleções" key="3">
+        <TabPane tab="Seleções" key="3" disabled={!tables.length}>
           <SelectionContainer tables={tables} />
         </TabPane>
       </Tabs>

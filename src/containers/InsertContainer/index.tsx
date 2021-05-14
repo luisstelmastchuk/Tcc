@@ -8,6 +8,7 @@ import { sleep } from '../../../shared/utils/sleep'
 import { message, Tooltip } from 'antd'
 
 import {
+  Container,
   QueryContainer,
   RawContainer,
   ActionContainer,
@@ -38,7 +39,11 @@ const InsertContainer: React.FC<IProps> = ({ tables }) => {
 
   useEffect(() => {
     setTable(tables[0])
-    setAttributes(tables[0].attributes)
+    setAttributes(
+      tables[0].attributes.filter(
+        (attribute) => attribute.name !== tables[0].primaryKey
+      )
+    )
   }, [tables])
 
   const handleFileChosen = (file: File): void => {
@@ -61,8 +66,9 @@ const InsertContainer: React.FC<IProps> = ({ tables }) => {
           const query = `INSERT INTO ${table.name}(${attributes
             .map((attribute) => attribute.name)
             .join(', ')}) VALUES (${value
+            .replace(/\s/g, '')
             .split(',')
-            .map((value) => Number.parseFloat(value) || `'${value}'`)
+            .map((value) => formatConditionType(value))
             .join(',')})`.replace(/(\r\n|\n|\r)/gm, '')
 
           setQueries((oldValues) => [...oldValues, query])
@@ -100,6 +106,9 @@ const InsertContainer: React.FC<IProps> = ({ tables }) => {
     if (!condition || condition === '') {
       return
     }
+    if (condition === 'true' || condition === 'false') {
+      return condition
+    }
     return Number.parseFloat(condition) || `'${condition}'`
   }
 
@@ -123,6 +132,7 @@ const InsertContainer: React.FC<IProps> = ({ tables }) => {
       .map((attribute) => attribute.name)
       .join(', ')}) VALUES (${
       valueToInsert
+        .replace(/\s/g, '')
         .split(',')
         .map((value) => formatConditionType(value))
         .join(',') || '...'
@@ -169,6 +179,7 @@ const InsertContainer: React.FC<IProps> = ({ tables }) => {
         message.error(error)
       } else {
         message.success('Instruções executadas com sucesso')
+        setQueries([])
       }
       setLoading(false)
     })
@@ -179,7 +190,7 @@ const InsertContainer: React.FC<IProps> = ({ tables }) => {
   }
 
   return (
-    <>
+    <Container>
       <QueryContainer>
         <Form>
           <Form.Item label="Tabela">
@@ -277,7 +288,7 @@ const InsertContainer: React.FC<IProps> = ({ tables }) => {
           Executar
         </Button>
       </ActionContainer>
-    </>
+    </Container>
   )
 }
 

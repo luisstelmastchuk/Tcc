@@ -53,6 +53,8 @@ const CreateContainer: React.FC<IProps> = ({ tables, setTables }) => {
 
     ipcRenderer.send('table:create', table)
     ipcRenderer.once('table:create:response', (event, response) => {
+      setTable(null)
+      message.success('Tabela criada com sucesso')
       setTables(response)
     })
   }

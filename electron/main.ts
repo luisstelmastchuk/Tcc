@@ -1,7 +1,7 @@
 /* eslint-disable import/first */
 require('../bootstrap')
 import 'reflect-metadata'
-import { app, BrowserWindow, screen, ipcMain, Menu } from 'electron'
+import { app, BrowserWindow, screen, ipcMain } from 'electron'
 import * as path from 'path'
 import * as url from 'url'
 import installExtension, {
@@ -41,7 +41,7 @@ async function createWindow() {
     )
   }
 
-  mainWindow.setTitle('Template')
+  mainWindow.setTitle('DBHelper')
 
   mainWindow.on('closed', () => {
     mainWindow = null

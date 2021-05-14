@@ -1,8 +1,8 @@
 {
-  "name": "template",
-  "version": "2.0.1",
+  "name": "dbhelper",
+  "version": "1.0.0",
   "main": "./dist/main.js",
-  "description": "Template",
+  "description": "A software to help new studants in database",
   "license": "MIT",
   "scripts": {
     "install": "electron-rebuild",
@@ -19,7 +19,7 @@
     "package": "npm-run-all build package:dist",
     "package:dist": "electron-builder --dir",
     "predeploy": "yarn build",
-    "deploy": "electron-builder build --win --publish always",
+    "deploy": "electron-builder build --win --publish never",
     "test": "jest",
     "database": "rimraf resources/db.sqlite  && npm run typeorm migration:run",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js"
@@ -40,7 +40,6 @@
     "@types/antd": "^1.0.0",
     "@types/electron-devtools-installer": "^2.2.0",
     "@types/jest": "^26.0.3",
-    "@types/knex": "^0.16.1",
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.6",
     "@types/react-router-dom": "^5.1.5",
@@ -90,7 +89,6 @@
     "@babel/runtime": "^7.11.2",
     "antd": "^4.6.4",
     "dotenv": "^8.2.0",
-    "knex": "^0.21.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-icons": "^4.2.0",
@@ -105,16 +103,18 @@
     "yarn": "^1.22.5"
   },
   "build": {
-    "appId": "com.github.Amadelli-TheBestAcai.github",
-    "productName": "Template",
+    "appId": "com.github.wirlleyd/dbhelper-tcc",
+    "productName": "DBHelper",
+    "win": {
+      "icon": "appIcon.png"
+    },
     "directories": {
       "output": "packages"
     },
     "files": [
       "package.json",
       "dist/**",
-      "amadelli_logo.icon",
-      "db.sqlite"
+      "appIcon.png"
     ],
     "extraFiles": [
       "resources/*"

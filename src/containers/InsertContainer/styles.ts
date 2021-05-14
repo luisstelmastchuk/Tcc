@@ -12,15 +12,27 @@ import {
 
 const { Option: OptionAnt } = SelectAnt
 
-export const QueryContainer = styled.div`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
   width: 100%;
+  height: 100%;
+`
+
+export const QueryContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  min-width: 40%;
+  width: fit-content;
   height: 20%;
   padding: 5%;
+  margin: 15px 0;
 
   background: white;
   border-radius: 5px;
@@ -35,8 +47,10 @@ export const QueryExempleContainer = styled.div`
 
   border: 1px solid #00000017;
   border-radius: 5px;
-  width: 100%;
+  min-width: 70%;
+  width: fit-content;
   height: 10%;
+  margin: 15px 0;
 
   background: white;
   border-radius: 5px;
@@ -56,7 +70,7 @@ export const QueryWrapper = styled.div`
 export const RawContainer = styled.div`
   display: inline-block;
 
-  width: 100%;
+  width: 80%;
   height: 60%;
   overflow-y: scroll;
 
@@ -131,4 +145,12 @@ export const Row = styled(RowAnt)`
   justify-content: center;
 
   width: 100%;
+  padding: 3px 0px;
+
+  &:nth-child(odd) {
+    background-color: #f6f4f4;
+  }
+  &:nth-child(even) {
+    background-color: #cccccc69;
+  }
 `

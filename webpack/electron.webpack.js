@@ -35,4 +35,7 @@ module.exports = {
     path: path.resolve(rootPath, 'dist'),
     filename: '[name].js',
   },
+  optimization: {
+    minimize: false
+  }
 }

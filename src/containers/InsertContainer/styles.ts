@@ -64,7 +64,7 @@ export const QueryWrapper = styled.div`
   align-items: center;
 
   word-break: break-all;
-  width: 30%;
+  width: 60%;
 `
 
 export const RawContainer = styled.div`

@@ -80,8 +80,9 @@ export const BottomSideContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
 
-  width: 100%;
-  height: 50%;
+  width: 97%;
+  height: 47%;
+  margin: 10px auto;
 
   background: white;
   border-radius: 5px;

@@ -133,80 +133,84 @@ const CreateContainer: React.FC<IProps> = ({ tables, setTables }) => {
         </TableCreatorWrapper>
       </TableCreatorContainer>
       <TableCreatorReview>
-        {table?.name && table?.attributes?.length ? (
-          <TableCreatorWrapper style={{ alignItems: 'center' }}>
-            <Row>
-              <Title> CREATE TABLE </Title>
-              <Value>{table?.name} (</Value>
-            </Row>
-            <Row
-              style={{
-                width: '100%',
-                maxHeight: '200px',
-                overflowY: 'scroll',
-              }}
-            >
-              {table && table.attributes?.length ? (
-                table.attributes.map((attribute) => (
-                  <TableAttributesContainer key={attribute.name}>
-                    <Row>
-                      <AttributeWrapper justifyContent="flex-end">
-                        <AttributeName>{attribute.name}</AttributeName>
-                      </AttributeWrapper>
-                      <AttributeWrapper justifyContent="flex-start">
-                        <AttributeType>{attribute.type},</AttributeType>
-                      </AttributeWrapper>
-                      <AttributeWrapper justifyContent="flex-start">
-                        <Button
-                          shape="circle"
-                          danger
-                          style={{
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            minWidth: '25px',
-                            height: '25px',
-                            fontSize: '10px',
-                            marginLeft: '10px',
-                          }}
-                          onClick={() => handleRemoveAttributes(attribute.name)}
-                        >
-                          X
-                        </Button>
-                      </AttributeWrapper>
-                    </Row>
-                  </TableAttributesContainer>
-                ))
-              ) : (
-                <></>
-              )}
-            </Row>
-            <Row>
-              {table && table.attributes?.length ? (
-                <>
-                  <Title> PRIMARY KEY </Title>
-                  <Select
-                    onChange={(selectedAttribute) =>
-                      setTable((oldValues) => ({
-                        ...oldValues,
-                        primaryKey: selectedAttribute.toString(),
-                      }))
-                    }
-                  >
-                    {table.attributes.map((attribute) => (
-                      <Option key={attribute.name}>{attribute.name}</Option>
-                    ))}
-                  </Select>
-                  );
-                </>
-              ) : (
-                <></>
-              )}
-            </Row>
-          </TableCreatorWrapper>
-        ) : (
-          <></>
-        )}
+        <TableCreatorWrapper style={{ alignItems: 'center', height: '75%' }}>
+          {table?.name && table?.attributes?.length ? (
+            <>
+              <Row>
+                <Title> CREATE TABLE </Title>
+                <Value>{table?.name} (</Value>
+              </Row>
+              <Row
+                style={{
+                  width: '100%',
+                  maxHeight: '200px',
+                  overflowY: 'scroll',
+                }}
+              >
+                {table && table.attributes?.length ? (
+                  table.attributes.map((attribute) => (
+                    <TableAttributesContainer key={attribute.name}>
+                      <Row>
+                        <AttributeWrapper justifyContent="flex-end">
+                          <AttributeName>{attribute.name}</AttributeName>
+                        </AttributeWrapper>
+                        <AttributeWrapper justifyContent="flex-start">
+                          <AttributeType>{attribute.type},</AttributeType>
+                        </AttributeWrapper>
+                        <AttributeWrapper justifyContent="flex-start">
+                          <Button
+                            shape="circle"
+                            danger
+                            style={{
+                              display: 'flex',
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                              minWidth: '25px',
+                              height: '25px',
+                              fontSize: '10px',
+                              marginLeft: '10px',
+                            }}
+                            onClick={() =>
+                              handleRemoveAttributes(attribute.name)
+                            }
+                          >
+                            X
+                          </Button>
+                        </AttributeWrapper>
+                      </Row>
+                    </TableAttributesContainer>
+                  ))
+                ) : (
+                  <></>
+                )}
+              </Row>
+              <Row>
+                {table && table.attributes?.length ? (
+                  <>
+                    <Title> PRIMARY KEY </Title>
+                    <Select
+                      onChange={(selectedAttribute) =>
+                        setTable((oldValues) => ({
+                          ...oldValues,
+                          primaryKey: selectedAttribute.toString(),
+                        }))
+                      }
+                    >
+                      {table.attributes.map((attribute) => (
+                        <Option key={attribute.name}>{attribute.name}</Option>
+                      ))}
+                    </Select>
+                    );
+                  </>
+                ) : (
+                  <></>
+                )}
+              </Row>
+            </>
+          ) : (
+            <></>
+          )}
+        </TableCreatorWrapper>
       </TableCreatorReview>
       <ActionContainer>
         <Button

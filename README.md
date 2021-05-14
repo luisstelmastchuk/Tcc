@@ -1,6 +1,6 @@
 ## Installation
 
-To install the software [click here](https://github.com/wirlleyd/dbhelper-tcc/releases/download/v1.0.0/DBHelper.Setup.1.0.0.exe). The software does not have a manufacturer, so when installing on the Windows operating system, it will be necessary to allow installation with an unknown manufacturer.
+To install the software [click here](https://github.com/wirlleyd/dbhelper-tcc/releases/download/v1.0.0/DBHelper.Setup.1.0.0.exe). The software does not have a provider, so when installing on the Windows operating system, it will be necessary to allow installation with an unknown provider.
 
 ## Creating Tables
 

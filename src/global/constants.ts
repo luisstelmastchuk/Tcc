@@ -1,0 +1,28 @@
+const NOTAS = [
+  { key: 'q', name: 'c0', isActived: false },
+  { key: 'w', name: 'df0', isActived: false },
+  { key: 'e', name: 'd0', isActived: false },
+  { key: 'r', name: 'ef0', isActived: false },
+  { key: 't', name: 'e0', isActived: false },
+  { key: 'y', name: 'f0', isActived: false },
+  { key: 'u', name: 'gf0', isActived: false },
+  { key: 'i', name: 'g0', isActived: false },
+  { key: 'o', name: 'af0', isActived: false },
+  { key: 'p', name: 'a0', isActived: false },
+  { key: 'a', name: 'bf0', isActived: false },
+  { key: 's', name: 'b0', isActived: false },
+  { key: 'd', name: 'c1', isActived: false },
+  { key: 'f', name: 'df1', isActived: false },
+  { key: 'g', name: 'd1', isActived: false },
+  { key: 'h', name: 'ef1', isActived: false },
+  { key: 'j', name: 'e1', isActived: false },
+  { key: 'k', name: 'f1', isActived: false },
+  { key: 'l', name: 'gf1', isActived: false },
+  { key: 'ç', name: 'g1', isActived: false },
+  { key: 'z', name: 'af1', isActived: false },
+  { key: 'x', name: 'a1', isActived: false },
+  { key: 'c', name: 'bf1', isActived: false },
+  { key: 'v', name: 'b1', isActived: false },
+]
+
+export { NOTAS }
